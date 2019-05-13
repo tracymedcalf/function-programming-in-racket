@@ -79,6 +79,20 @@ What's that **else** doing at the end? That's where we recursively call the func
 > (contains-even? '(1 3))
 \#f
 
+In this example, we build a list. That list is the result of applying a bit mask to another list. In this context, that means that we keep a value at an index in val only if there is a 1 at the corresponding index in mask. So a mask of '(1 0 1) and val of '(2 3 4) means we return '(2 4). 
+```
+(define (apply-bitmask mask val)
+(if (empty? val) '()
+  (if (= 1 (car mask)) (cons (car val) (apply-bitmask (cdr mask) (cdr val))) 
+    (apply-bitmask (cdr mask) (cdr val)))))
+
+(writeln (apply-bitmask '(1 0 1 0) '(8 9 7 6)))
+```
+
+**apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. Provided we use it right, **cons** will return a list. In this case, if we encounter a 1 at the beginning of mask, then we want to cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
+
+(8 7)
+
 ## Composition
 This is used when we want to create a new function that combines two functions.
 (define f (compose g h))
