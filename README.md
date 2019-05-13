@@ -89,7 +89,7 @@ In this example, we build a list. That list is the result of applying a bit mask
 (writeln (apply-bitmask '(1 0 1 0) '(8 9 7 6)))
 ```
 
-**apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. Provided we use it right, **cons** will return a list. In this case, if we encounter a 1 at the beginning of mask, then we want to cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
+**apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. Provided we use it right, **cons** will return a list. In the case where we encounter a 1 at the beginning of mask, we cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
 
 (8 7)
 
