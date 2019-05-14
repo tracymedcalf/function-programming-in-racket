@@ -113,13 +113,18 @@ Some problems that the data structure we're meant to build be handed down to the
 ```
 The value returned is also the value returned by the final recursive call to **my-reverse-aux**.
 
+However, we don't want to have to hand our reverse function an empty list as a second argument everytime we use it. Instead, we'll call **my-reverse-aux** from another function.
+```
+(define (my-reverse original) (my-reverse-aux original '()))
+```
 ## Functions can be data
+```
 (define (fun1) "returned by fun1")
 
 (define (eval-arg arg) (arg))
 
 (writeln (eval-arg fun1))
-
+```
 ## Composition
 This is used when we want to create a new function that combines two functions.
 ```
