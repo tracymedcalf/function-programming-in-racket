@@ -65,6 +65,7 @@ In Java, this last is the same as
 > (cdr (cdr things))
 '()
 ```
+# By example
 ## Recursion
 A function that calls itself. Functions can also call each other repeatedly. For example, f can call g and g can call f until some condition is met. That condition is called the base case. A recursive function must have a base case so that at some point a function call will return without recursing. That's a lot of information. Let's break it down.
 ```
@@ -117,7 +118,7 @@ However, we don't want to have to hand our reverse function an empty list as a s
 ```
 (define (my-reverse original) (my-reverse-aux original '()))
 ```
-## Functions can be data
+## Functions as data
 ```
 (define (fun1) "returned by fun1")
 
@@ -125,6 +126,7 @@ However, we don't want to have to hand our reverse function an empty list as a s
 
 (writeln (eval-arg fun1))
 ```
+The above prints `returned by fun1`.
 ## Composition
 This is used when we want to create a new function that combines two functions.
 ```
