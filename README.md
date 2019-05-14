@@ -41,7 +41,7 @@ int a = 4;
 
 ## Working with lists
 **cons** returns a new list that's the first argument appended to the second, which is a list. **car** returns the first element of a list. **cdr** returns the remainder of a list without the first element. Let's see them in action.
-
+```
 > (cons 1 '(2 3))
 '(1 2 3)
 
@@ -57,17 +57,17 @@ int a = 4;
 
 > (cdr (cdr things))
 '()
-
+```
 ## Recursion
 A function that calls itself. Functions can also call each other repeatedly. For example, f can call g and g can call f until some condition is met. That condition is called the base case. A recursive function must have a base case so that at some point a function call will return without recursing. That's a lot of information. Let's break it down.
-
+```
 (define (contains-even? num-list)
   (cond
     [[empty? num-list] #f]
     [[even? (car num-list)] #t]
     [else (contains-even? (cdr num-list))]
   ))
-
+```
 A note on the square brackets: whether you use ( or \[ makes no difference in Racket, only you must close each paren with a paren of the same style. The way I'm using square brackets in the conditional here is simply a convention to make the code more readable.
 
 The base case is that the list is empty. This is pretty typical. We can't recurse on an empty list, so we return false. Why false? Because by this point, we've checked every element of the list to see if it's even. If we had found an even number, the function would have returned true.
@@ -89,9 +89,24 @@ In this example, we build a list. That list is the result of applying a bit mask
 (writeln (apply-bitmask '(1 0 1 0) '(8 9 7 6)))
 ```
 
-**apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. Provided we use it right, **cons** will return a list. In the case where we encounter a 1 at the beginning of mask, we cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
+**apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. In the case where we encounter a 1 at the beginning of mask, we cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
 
 (8 7)
+
+### Reverse list
+
+Some problems that the data structure we're meant to build be handed down to the next function call. That's what accumulator is in the following definition.
+```
+(define (my-reverse-aux original accumulator)
+  (if (empty? original) accumulator
+        (my-reverse-aux (cdr original) (cons (car original) accumulator)
+                 )))
+
+(writeln (my-reverse-aux '(1 2 3 4) '()))
+```
+The value returned is also the value returned by the final recursive call to **my-reverse-aux**.
+
+
 
 ## Composition
 This is used when we want to create a new function that combines two functions.
@@ -99,7 +114,5 @@ This is used when we want to create a new function that combines two functions.
 is essentially the same as
 (define [f some-arg] (g (h some-arg)))
 **Compose** saves some typing and is more reusable, since you might later redefine g to take a different number of arguments.
-
-## Reverse a String as a List
 
 # Appendix
