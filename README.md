@@ -119,6 +119,7 @@ However, we don't want to have to hand our reverse function an empty list as a s
 (define (my-reverse original) (my-reverse-aux original '()))
 ```
 ## Functions as data
+A function can take a function as an argument.
 ```
 (define (fun1) "returned by fun1")
 
@@ -127,6 +128,17 @@ However, we don't want to have to hand our reverse function an empty list as a s
 (writeln (eval-arg fun1))
 ```
 The above prints `returned by fun1`.
+
+We'll define a function that takes a function and a list and returns a new list that's the result of applying the function to the elements of the original list.
+```
+(define (my-map function lis)
+  (if (empty? lis) '()
+  (cons (function (car lis)) (my-map function (cdr lis)))))
+
+(writeln (my-map (lambda [x] (+ x 1)) '(10 10 10 10)))
+; prints (11 11 11 11)
+```
+
 ## Composition
 This is used when we want to create a new function that combines two functions.
 ```

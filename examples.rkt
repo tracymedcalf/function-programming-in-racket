@@ -20,3 +20,10 @@
 (define (eval-arg arg) (arg))
 
 (writeln (eval-arg fun1))
+
+(define (my-map function lis)
+  (if (empty? lis) '()
+  (cons (function (car lis)) (my-map function (cdr lis)))))
+
+(writeln (my-map (lambda [x] (+ x 1)) '(10 10 10 10)))
+
