@@ -10,34 +10,34 @@ One way to follow along with this tutorial is to type the examples into a REPL (
 A Racket function returns the last expression it evaluates. That means there is no return statement. In fact, there are no statements in Racket, just a series of expressions to be evaluated.
 
 What is an expression in Racket? Anything that starts with (. If you see an opening parenthesis, it means that the function that follows is the function being called. Some special forms are an exception, like
-
+```
 '(1 2 3)
-
-The quote stops Racket from evaluating what follows as expression. More specifically, the above is a way to create a list. Racket is descended from LISP, which stands for list processing, so lists are a central aspect of Racket.
+```
+The quote stops Racket from evaluating what follows. More specifically, the above is a way to create a list. Racket is descended from LISP, which stands for list processing, so lists are a central aspect of Racket.
 
 ## The Basic Syntax
 
 From the Racket docs, we define a function like so:
-
+```
 (define (id arg ...) body ...+)
-
+```
 which is a shorthand for
-
+```
 (define id (lambda (arg ...) body ...+)
-
+```
 I prefer the first way because it's less typing and easier to remember, but the second is more explicit, telling us exactly what is going on. First, the **lambda** returns a function that takes *arg* and returns the result of *body*. **define** then binds the function to id so that we can call it elsewhere in our program. If we omit the **define**, we can create a lambda function that can be passed an argument to another function. If you don't understand that last part, don't worry, we'll explore it in more depth later. For now it's enough that you know how to bind a function to an id.
 
 The second way also reminds us what **define** is doing, which is evaluating an expression and binding it to a value (calling **lambda** is an expression). This means we can do
-
-(define a (\* 2 2))
-
+```
+(define a (* 2 2))
+```
 as well as
-
+```
 (define a 4)
-
+```
 In Java, this last is the same as
 
-int a = 4;
+`int a = 4;`
 
 ## Working with lists
 **cons** returns a new list that's the first argument appended to the second, which is a list. **car** returns the first element of a list. **cdr** returns the remainder of a list without the first element. Let's see them in action.
@@ -75,10 +75,10 @@ The base case is that the list is empty. This is pretty typical. We can't recurs
 After that we check if the first element of num-list is even. If it is, we return true.
 
 What's that **else** doing at the end? That's where we recursively call the function on the remainder of the list **that hasn't been checked**. Two things are worth noting: **cdr** and the recursive call. **cdr** returns the list without the first element. It then hands this new list to contains-even? to check.
-
+```
 > (contains-even? '(1 3))
 \#f
-
+```
 In this example, we build a list. That list is the result of applying a bit mask to another list. In this context, that means that we keep a value at an index in val only if there is a 1 at the corresponding index in mask. So a mask of '(1 0 1) and val of '(2 3 4) means we return '(2 4). 
 ```
 (define (apply-bitmask mask val)
@@ -90,9 +90,9 @@ In this example, we build a list. That list is the result of applying a bit mask
 ```
 
 **apply-bitmask** should always return a list, so the last expression it evaluates always results in a list. In the case where we encounter a 1 at the beginning of mask, we cons the beginning of **car** of val onto the beginning of the list returned by **apply-bitmask**. The call to **apply-bitmask** above returns
-
+```
 (8 7)
-
+```
 ### Reverse list
 
 Some problems that the data structure we're meant to build be handed down to the next function call. That's what accumulator is in the following definition.
@@ -110,9 +110,13 @@ The value returned is also the value returned by the final recursive call to **m
 
 ## Composition
 This is used when we want to create a new function that combines two functions.
+```
 (define f (compose g h))
+```
 is essentially the same as
+```
 (define [f some-arg] (g (h some-arg)))
+```
 **Compose** saves some typing and is more reusable, since you might later redefine g to take a different number of arguments.
 
 # Appendix
