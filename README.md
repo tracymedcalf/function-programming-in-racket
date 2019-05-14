@@ -9,11 +9,18 @@ One way to follow along with this tutorial is to type the examples into a REPL (
 ## The Basic Idea
 A Racket function returns the last expression it evaluates. That means there is no return statement. In fact, there are no statements in Racket, just a series of expressions to be evaluated.
 
-What is an expression in Racket? Anything that starts with (. If you see an opening parenthesis, it means that the function that follows is the function being called. Some special forms are an exception, like
+What is an expression in Racket? Anything that starts with an opening parenthesis.
+```
+(+ 1 3)
+> 4
+```
+In the above, the function **+** is being called on arguments 1 and 3. To call a function, it must be preceded by an opening parenthesis
+
+However, a quote stops whatever follows from being evaluated.
 ```
 '(1 2 3)
 ```
-The quote stops Racket from evaluating what follows. More specifically, the above is a way to create a list. Racket is descended from LISP, which stands for list processing, so lists are a central aspect of Racket.
+More specifically, the above is a way to create a list. Racket is descended from LISP, which stands for list processing, so lists are a central aspect of Racket.
 
 ## The Basic Syntax
 
@@ -117,6 +124,6 @@ is essentially the same as
 ```
 (define [f some-arg] (g (h some-arg)))
 ```
-**Compose** saves some typing and is more reusable, since you might later redefine g to take a different number of arguments.
+**Compose** saves some typing and is more reusable, since you might later redefine **h** to take a different number of arguments.
 
 # Appendix
