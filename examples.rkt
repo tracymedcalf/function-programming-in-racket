@@ -12,3 +12,9 @@
                  )))
 
 (writeln (my-reverse '(1 2 3 4) '()))
+
+(define (fun1) "returned by fun1")
+
+(define (eval-arg arg) (arg))
+
+(writeln (eval-arg fun1))
