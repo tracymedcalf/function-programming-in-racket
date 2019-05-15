@@ -6,14 +6,15 @@
 (writeln (apply-bitmask '(1 0 1 0) '(8 9 7 6)))
 
 
-(define (my-reverse original accumulator)
+(define (my-reverse-aux original accumulator)
   (if (empty? original) accumulator
-        (my-reverse (cdr original) (cons (car original) accumulator)
+        (my-reverse-aux (cdr original) (cons (car original) accumulator)
                  )))
 
-(writeln (my-reverse '(1 2 3 4) '()))
-
 (define (my-reverse original) (my-reverse-aux original '()))
+
+(writeln (my-reverse '(1 2 3 4)))
+
 
 (define (fun1) "returned by fun1")
 
@@ -44,3 +45,10 @@
   ((return-me "fun4") "fun4 again"))
 
 (fun2 return-me)
+
+; equal? can return whether 2 lists are equal
+(define (palidrome? lis)
+  (equal? lis (my-reverse lis)))
+
+(writeln (palidrome? '(1 2 3 2 1))) ; expect true
+(writeln (palidrome? '(1 6 7))) ; expect false
