@@ -118,6 +118,11 @@ However, we don't want to have to hand our reverse function an empty list as a s
 ```
 (define (my-reverse original) (my-reverse-aux original '()))
 ```
+
+### Two ways of building a list
+
+**apply-bitmask** and **my-reverse** demonstrate two ways of building a list. In the first, we **cons** the value onto the result of the recursive call to **apply-bitmask**. In the second, we hand the result of **cons** to the recursive call to **my-reverse-aux**, in which case every recursive call receives an element that is one element larger than the last call. Which method you use depends on the problem.
+
 ## Functions as data
 A function can take a function as an argument.
 ```
@@ -149,6 +154,9 @@ is essentially the same as
 (define [f some-arg] (g (h some-arg)))
 ```
 **Compose** saves some typing and is more reusable, since you might later redefine **h** to take a different number of arguments.
+
+# Contributing
+If you wish that more people would see the beauty of Racket, or you just think my examples are inadequate, consider submitting a pull request. You contribution might be added to the appendix or incorporated into the main body of the tutorial.
 
 # Appendix
 
