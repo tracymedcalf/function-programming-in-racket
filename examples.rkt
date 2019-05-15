@@ -27,3 +27,20 @@
 
 (writeln (my-map (lambda [x] (+ x 1)) '(10 10 10 10)))
 
+; A function that returns itself
+(define (return-me msg)
+  (printf "calling return-me from ~a\n" msg)
+  (lambda [msg*] (return-me msg*)))
+
+(return-me "thing")
+
+(define (fun2 fun)
+  (fun3 (return-me "fun2")))
+
+(define (fun3 fun)
+  (fun4 (return-me "fun3")))
+
+(define (fun4 fun)
+  ((return-me "fun4") "fun4 again"))
+
+(fun2 return-me)

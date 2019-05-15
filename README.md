@@ -9,7 +9,7 @@ One way to follow along with this tutorial is to type the examples into a REPL (
 ## The Basic Idea
 A Racket function returns the last expression it evaluates. That means there is no return statement. In fact, there are no statements in Racket, just a series of expressions to be evaluated.
 
-What is an expression in Racket? Anything that starts with an opening parenthesis.
+An opening parenthesis tells Racket to evaluate the expression that follows.
 ```
 (+ 1 3)
 > 4
@@ -151,3 +151,31 @@ is essentially the same as
 **Compose** saves some typing and is more reusable, since you might later redefine **h** to take a different number of arguments.
 
 # Appendix
+
+## A function that returns itself
+```
+(define (return-me msg)
+  (printf "calling return-me from ~a\n" msg)
+  (lambda [msg*] (return-me msg*)))
+
+(return-me "thing")
+
+(define (fun2 fun)
+  (fun3 (return-me "fun2")))
+
+(define (fun3 fun)
+  (fun4 (return-me "fun3")))
+
+(define (fun4 fun)
+  ((return-me "fun4") "fun4 again"))
+
+(fun2 return-me)
+```
+Output:
+```
+calling return-me from thing
+calling return-me from fun2
+calling return-me from fun3
+calling return-me from fun4
+calling return-me from fun4 again
+```
