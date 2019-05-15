@@ -121,7 +121,7 @@ However, we don't want to have to hand our reverse function an empty list as a s
 
 ### Two ways of building a list
 
-**apply-bitmask** and **my-reverse** demonstrate two ways of building a list. In the first, we **cons** the value onto the result of the recursive call to **apply-bitmask**. In the second, we hand the result of **cons** to the recursive call to **my-reverse-aux**, in which case every recursive call receives an element that is one element larger than the last call. Which method you use depends on the problem.
+**apply-bitmask** and **my-reverse** demonstrate two ways of building a list. In the first, we **cons** the value onto the result of the recursive call to **apply-bitmask**. In the second, we hand the result of **cons** to the recursive call to **my-reverse-aux**, in which case every recursive call receives a list that is one element larger than the last call. Which method you use depends on the problem.
 
 ## Functions as data
 A function can take a function as an argument.
