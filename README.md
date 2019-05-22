@@ -83,7 +83,7 @@ The base case is that the list is empty. This is pretty typical. We can't recurs
 After that we check if the first element of num-list is even. If it is, we return true.
 
 What's that **else** doing at the end? That's where we recursively call the function on the remainder of the list **that hasn't been checked**. Two things are worth noting: **cdr** and the recursive call. **cdr** returns the list without the first element. It then hands this new list to contains-even? to check.
-```
+
 > (contains-even? '(1 3))
 \#f
 ```
@@ -144,7 +144,7 @@ We'll define a function that takes a function and a list and returns a new list 
 ; prints (11 11 11 11)
 ```
 
-## Composition
+### Composition
 This is used when we want to create a new function that combines two functions.
 ```
 (define f (compose g h))
@@ -154,6 +154,18 @@ is essentially the same as
 (define [f some-arg] (g (h some-arg)))
 ```
 **Compose** saves some typing and is more reusable, since you might later redefine **h** to take a different number of arguments.
+
+# Helpful Tips
+
+## Avoid paren overload, modularize
+
+Don't spend your time making sure that you put the closing parenthesis in the right place. Programmers before you have been productive in lisp-family languages, and so can you. Instead, break up large functions into smaller functions. It makes your code more readable because
+
+1) There will be less parentheses to manage.
+
+2) The name of the new, smaller functions will describe what they do.
+
+Plus, as your program gets larger, you may find yourself with opportunities to reuse functions you wrote earlier. Smaller functions tend to be applicable to broader classes of problems, and you get even more mileage out of them by the fact that Racket gives you tools to manipulate functions. For examples, check out the [functions that Racket provides](https://docs.racket-lang.org/predicates/index.html) for building new predicates out of existing ones.
 
 # Contributing
 If you wish that more people would see the beauty of Racket, or you just think my examples are inadequate, consider submitting a pull request. You contribution might be added to the appendix or incorporated into the main body of the tutorial.
